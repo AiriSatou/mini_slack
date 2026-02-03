@@ -1,8 +1,10 @@
 # mini_slack
 Laravelで作成した、Slack風のチャンネル型チャットアプリです。
+Laravelの基礎（認証・CRUD・リレーション・画面遷移）を一通り実装することを目的として作成しました。
+
 ユーザー認証、チャンネル管理、メッセージ投稿などの基本機能を実装しています。
 
-##　主な機能
+## 主な機能
 - ユーザー登録 / ログイン / ログアウト
 - チャンネル作成・削除
 - チャンネルごとのメッセージ投稿・削除・編集
@@ -42,4 +44,3 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan serve
----
