@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.message-user {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1c1d;
+}
+
+.message-body {
+  line-height: 1.6;
+}
+
