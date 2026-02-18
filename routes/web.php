@@ -45,7 +45,7 @@ require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function(){
 
-    Route::get('/channels',[ChannelController::class,'index'])->name('channels.index');
+    Route::get('/channels',[ChannelController::class,'index'])->name('channels.index'); 
     Route::post('/channels',[ChannelController::class,'store'])->name('channels.store');
     Route::get('/channels/{channel}',[ChannelController::class,'show'])->name('channels.show');
     Route::delete('/channels/{channel}', [ChannelController::class, 'destroy'])->name('channels.destroy');

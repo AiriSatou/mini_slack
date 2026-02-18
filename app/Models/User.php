@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'display_name',
+        'last_channel_id',
     ];
 
     /**

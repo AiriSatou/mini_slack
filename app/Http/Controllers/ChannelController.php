@@ -28,7 +28,7 @@ class ChannelController extends Controller
         }
 
         public function show(Channel $channel){
-         auth()->user()->update(['last_channel_id' => $channel->id,]); 
+         auth()->user()->update(['last_channel_id' => $channel->id,]); //ユーザーの最後に閲覧したチャンネルIDを更新
          $channels = Channel::orderBy('created_at','desc')->get(); //サイドバー用に全チャンネル取得
          $messages = Message::where('channel_id',$channel->id)
                      ->with('user')
@@ -38,29 +38,30 @@ class ChannelController extends Controller
         }
 
         public function destroy(Channel $channel)
-{
-    if (auth()->id() !== $channel->created_by) abort(403);
+        
+        {
+            if (auth()->id() !== $channel->created_by) abort(403);
 
-    $deletedId = $channel->id;
-    $channel->delete();
+            $deletedId = $channel->id;
+            $channel->delete();
 
-    // もし削除したのが「最後に見たチャンネル」ならリセット
-    $user = auth()->user();
-    if ($user->last_channel_id === $deletedId) {
-        $user->last_channel_id = null;
-        $user->save();
-    }
+         // もし削除したのが「最後に見たチャンネル」ならリセット
+         $user = auth()->user();
+         if ($user->last_channel_id === $deletedId) {
+            $user->last_channel_id = null;
+            $user->save();
+            }
 
-    // 次に表示するチャンネル（例：一番新しいチャンネル）
-    $nextChannel = Channel::orderBy('id', 'desc')->first();
+         //次に表示するチャンネル（例：一番新しいチャンネル）
+          $nextChannel = Channel::orderBy('id', 'desc')->first();
 
-    if ($nextChannel) {
-        return redirect()
+         if ($nextChannel) {
+          return redirect()
             ->route('channels.show', $nextChannel)
             ->with('success', '削除しました');
-    }
+             }
 
     // チャンネルが0件なら一覧へ
-    return redirect()->route('channels.index')->with('success', '削除しました');
-}
+          return redirect()->route('channels.index')->with('success', '削除しました');
+        }
 }

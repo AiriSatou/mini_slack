@@ -13,7 +13,7 @@ class Message extends Model
     protected $fillable = [
         'channel_id',
         'user_id',
-        'body'
+        'body' 
     ];
 
     public function channel(){return $this->belongsTo(Channel::class);}
